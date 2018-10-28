@@ -34,13 +34,19 @@ const store = createStore(
 
 function *saga() {
   yield takeEvery('FEATCH_LIST', function *() {
-    const list = yield call(mock);
-    yield put({
-      type: 'UPDATE',
-      payload: {
-        list
-      }
-    })
+    try {
+      const list = yield call(mock);
+      yield put({
+        type: 'UPDATE',
+        payload: {
+          list
+        }
+      })
+    } catch(err) {
+      yield put({
+        type: 'CLEAR'
+      })
+    }
   })
 }
 sagaMiddleware.run(saga);

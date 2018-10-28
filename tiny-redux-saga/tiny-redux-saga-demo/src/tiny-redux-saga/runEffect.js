@@ -13,7 +13,7 @@ function runCallEffect({ fn, args }, next) {
   /* 通常情况fn返回promise */
   fn.call(null, args)
     .then(success => next(null, success))
-    .then(error => next(error))
+    .catch(error => next(error))
 }
 
 function runPutEffect({ action }, next, store) {
