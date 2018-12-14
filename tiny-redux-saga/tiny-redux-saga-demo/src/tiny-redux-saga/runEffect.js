@@ -11,7 +11,7 @@ function runTakeEffect({ pattern }, next) {
 
 function runCallEffect({ fn, args }, next) {
   /* 通常情况fn返回promise */
-  fn.call(null, args)
+  fn.call(null, ...args)
     .then(success => next(null, success))
     .catch(error => next(error))
 }
